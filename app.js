@@ -118,7 +118,7 @@ function buildCard(person) {
       Full week
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
     </button>
-    <div class="details"><div class="details-inner"></div></div>
+    <div class="details" hidden><div class="details-inner"></div></div>
   `;
 
   const detailsInner = card.querySelector('.details-inner');
@@ -168,14 +168,8 @@ function buildCard(person) {
   const details = card.querySelector('.details');
   card.querySelector('.expand-toggle').addEventListener('click', (e) => {
     e.stopPropagation();
-    const opening = !card.classList.contains('open');
-    card.classList.toggle('open', opening);
-    details.style.maxHeight = opening ? `${detailsInner.scrollHeight}px` : '0px';
-  });
-  window.addEventListener('resize', () => {
-    if (card.classList.contains('open')) {
-      details.style.maxHeight = `${detailsInner.scrollHeight}px`;
-    }
+    details.hidden = !details.hidden;
+    card.classList.toggle('open', !details.hidden);
   });
 
   const refs = {
