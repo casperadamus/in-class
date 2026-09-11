@@ -7,6 +7,7 @@ const PEOPLE = [
   {
     id: 'casper',
     name: 'Casper',
+    accent: '#6366f1',
     classes: [
       { day: 'Mon', start: '10:10', end: '11:00', course: 'ECE 2001-001', type: 'Lecture', location: 'Arjona 105' },
       { day: 'Mon', start: '13:25', end: '14:15', course: 'CSE 3100-011', type: 'Lecture', location: 'Family Studies 025' },
@@ -26,6 +27,7 @@ const PEOPLE = [
   {
     id: 'pat',
     name: 'Pat',
+    accent: '#f59e0b',
     classes: [
       { day: 'Mon', start: '10:10', end: '11:00', course: 'GSCU 1000E-001', type: 'Lecture', location: 'Monteith 104' },
       { day: 'Tue', start: '09:30', end: '10:45', course: 'MATH 2110Q-120', type: 'Lecture', location: 'Herbst 101' },
@@ -42,6 +44,7 @@ const PEOPLE = [
   {
     id: 'pawel',
     name: 'Pawel',
+    accent: '#06b6d4',
     classes: [
       { day: 'Mon', start: '09:00', end: '11:45', course: 'ECE 4095-001', type: 'Lecture', location: 'ITE 323' },
       { day: 'Tue', start: '09:30', end: '10:45', course: 'ECE 3101-001', type: 'Lecture', location: 'McHugh 206' },
@@ -60,6 +63,7 @@ const PEOPLE = [
   {
     id: 'pelka',
     name: 'Pelka',
+    accent: '#ec4899',
     classes: [
       { day: 'Mon', start: '09:00', end: '11:45', course: 'ECE 4095-001', type: 'Lecture', location: 'ITE 323' },
       { day: 'Mon', start: '14:30', end: '15:20', course: 'MATH 2210Q-006', type: 'Lecture', location: 'Monteith 112' },
