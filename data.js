@@ -1,0 +1,81 @@
+// Schedule data, transcribed from UConn Student Admin weekly schedule screenshots.
+// Times are 24h "HH:MM" local to America/New_York. Days: Mon..Sun.
+
+const SEMESTER = { start: '2026-08-31', end: '2026-12-11' };
+
+const PEOPLE = [
+  {
+    id: 'casper',
+    name: 'Casper',
+    classes: [
+      { day: 'Mon', start: '10:10', end: '11:00', course: 'ECE 2001-001', type: 'Lecture', location: 'Arjona 105' },
+      { day: 'Mon', start: '13:25', end: '14:15', course: 'CSE 3100-011', type: 'Lecture', location: 'Family Studies 025' },
+      { day: 'Mon', start: '15:30', end: '16:45', course: 'CSE 2301-001', type: 'Lecture', location: 'McHugh 101' },
+      { day: 'Tue', start: '11:00', end: '12:45', course: 'ECE 2001-002L', type: 'Lab', location: 'ITE C30' },
+      { day: 'Tue', start: '14:00', end: '15:15', course: 'MATH 3510-001', type: 'Lecture', location: 'Monteith 419' },
+      { day: 'Tue', start: '15:45', end: '17:45', course: 'ECE 2001-002D', type: 'Discussion', location: 'McHugh 107' },
+      { day: 'Wed', start: '10:10', end: '11:00', course: 'ECE 2001-001', type: 'Lecture', location: 'Arjona 105' },
+      { day: 'Wed', start: '13:25', end: '14:15', course: 'CSE 3100-011', type: 'Lecture', location: 'Family Studies 025' },
+      { day: 'Thu', start: '10:00', end: '11:50', course: 'CSE 2301-002L', type: 'Lab', location: 'ITE C31' },
+      { day: 'Thu', start: '14:00', end: '15:15', course: 'MATH 3510-001', type: 'Lecture', location: 'Monteith 419' },
+      { day: 'Thu', start: '15:30', end: '16:45', course: 'CSE 2301-001', type: 'Lecture', location: 'McHugh 101' },
+      { day: 'Fri', start: '08:00', end: '09:50', course: 'CSE 3100-011L', type: 'Lab', location: 'ITE 134' },
+      { day: 'Fri', start: '10:10', end: '11:00', course: 'ECE 2001-001', type: 'Lecture', location: 'Arjona 105' },
+    ],
+  },
+  {
+    id: 'pat',
+    name: 'Pat',
+    classes: [
+      { day: 'Mon', start: '10:10', end: '11:00', course: 'GSCU 1000E-001', type: 'Lecture', location: 'Monteith 104' },
+      { day: 'Tue', start: '09:30', end: '10:45', course: 'MATH 2110Q-120', type: 'Lecture', location: 'Herbst 101' },
+      { day: 'Tue', start: '11:00', end: '12:15', course: 'SPAN 1001-004', type: 'Lecture', location: 'Herbst 235' },
+      { day: 'Tue', start: '12:30', end: '13:45', course: 'CE 2110-001', type: 'Lecture', location: 'Sci-1 Research Ctr G01' },
+      { day: 'Wed', start: '10:10', end: '11:00', course: 'GSCU 1000E-001', type: 'Lecture', location: 'Monteith 104' },
+      { day: 'Thu', start: '09:30', end: '10:45', course: 'MATH 2110Q-120', type: 'Lecture', location: 'Herbst 101' },
+      { day: 'Thu', start: '11:00', end: '12:15', course: 'SPAN 1001-004', type: 'Lecture', location: 'Herbst 235' },
+      { day: 'Thu', start: '12:30', end: '13:45', course: 'CE 2110-001', type: 'Lecture', location: 'Sci-1 Research Ctr G01' },
+      { day: 'Fri', start: '09:05', end: '09:55', course: 'MATH 2110Q-122D', type: 'Discussion', location: 'Monteith 419' },
+      { day: 'Fri', start: '10:10', end: '11:00', course: 'GSCU 1000E-001', type: 'Lecture', location: 'Monteith 104' },
+    ],
+  },
+  {
+    id: 'pawel',
+    name: 'Pawel',
+    classes: [
+      { day: 'Mon', start: '09:00', end: '11:45', course: 'ECE 4095-001', type: 'Lecture', location: 'ITE 323' },
+      { day: 'Tue', start: '09:30', end: '10:45', course: 'ECE 3101-001', type: 'Lecture', location: 'McHugh 206' },
+      { day: 'Tue', start: '11:00', end: '12:15', course: 'ECE 3001-001', type: 'Lecture', location: 'ITE 336' },
+      { day: 'Tue', start: '12:30', end: '13:45', course: 'ECE 3201-001', type: 'Lecture', location: 'Monteith 111' },
+      { day: 'Tue', start: '15:30', end: '16:45', course: 'CSE 2301-001', type: 'Lecture', location: 'McHugh 101' },
+      { day: 'Wed', start: '10:10', end: '11:00', course: 'ECE 3101-002D', type: 'Discussion', location: 'Family Studies 216' },
+      { day: 'Thu', start: '09:30', end: '10:45', course: 'ECE 3101-001', type: 'Lecture', location: 'McHugh 206' },
+      { day: 'Thu', start: '11:00', end: '12:15', course: 'ECE 3001-001', type: 'Lecture', location: 'ITE 336' },
+      { day: 'Thu', start: '12:30', end: '13:45', course: 'ECE 3201-001', type: 'Lecture', location: 'Monteith 111' },
+      { day: 'Thu', start: '15:30', end: '16:45', course: 'CSE 2301-001', type: 'Lecture', location: 'McHugh 101' },
+      { day: 'Fri', start: '10:10', end: '12:00', course: 'CSE 2301-004L', type: 'Lab', location: 'ITE C31' },
+      { day: 'Fri', start: '12:20', end: '14:20', course: 'ECE 3201-003L', type: 'Lab', location: 'ITE C30' },
+    ],
+  },
+  {
+    id: 'pelka',
+    name: 'Pelka',
+    classes: [
+      { day: 'Mon', start: '09:00', end: '11:45', course: 'ECE 4095-001', type: 'Lecture', location: 'ITE 323' },
+      { day: 'Mon', start: '14:30', end: '15:20', course: 'MATH 2210Q-006', type: 'Lecture', location: 'Monteith 112' },
+      { day: 'Tue', start: '09:30', end: '10:45', course: 'ECE 3101-001', type: 'Lecture', location: 'McHugh 206' },
+      { day: 'Tue', start: '11:00', end: '12:15', course: 'ECE 3001-001', type: 'Lecture', location: 'ITE 336' },
+      { day: 'Tue', start: '12:30', end: '13:45', course: 'ECE 3201-001', type: 'Lecture', location: 'Monteith 111' },
+      { day: 'Tue', start: '15:30', end: '16:45', course: 'CSE 2301-001', type: 'Lecture', location: 'McHugh 101' },
+      { day: 'Wed', start: '10:10', end: '11:00', course: 'ECE 3101-002D', type: 'Discussion', location: 'Family Studies 216' },
+      { day: 'Wed', start: '14:30', end: '15:20', course: 'MATH 2210Q-006', type: 'Lecture', location: 'Monteith 112' },
+      { day: 'Thu', start: '09:30', end: '10:45', course: 'ECE 3101-001', type: 'Lecture', location: 'McHugh 206' },
+      { day: 'Thu', start: '11:00', end: '12:15', course: 'ECE 3001-001', type: 'Lecture', location: 'ITE 336' },
+      { day: 'Thu', start: '12:30', end: '13:45', course: 'ECE 3201-001', type: 'Lecture', location: 'Monteith 111' },
+      { day: 'Thu', start: '15:30', end: '16:45', course: 'CSE 2301-001', type: 'Lecture', location: 'McHugh 101' },
+      { day: 'Fri', start: '10:10', end: '12:00', course: 'CSE 2301-004L', type: 'Lab', location: 'ITE C31' },
+      { day: 'Fri', start: '12:20', end: '14:20', course: 'ECE 3201-003L', type: 'Lab', location: 'ITE C30' },
+      { day: 'Fri', start: '14:30', end: '15:20', course: 'MATH 2210Q-006', type: 'Lecture', location: 'Monteith 112' },
+    ],
+  },
+];
