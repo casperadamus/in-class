@@ -95,6 +95,7 @@ function buildCard(person) {
         <h2>${person.name}</h2>
         <span class="pill"><span class="dot"></span><span class="pill-text"></span></span>
       </div>
+      <span class="loc-badge" hidden></span>
     </div>
     <div class="body-row">
       <div class="ring-wrap">
@@ -176,6 +177,7 @@ function buildCard(person) {
     card,
     pill: card.querySelector('.pill'),
     pillText: card.querySelector('.pill-text'),
+    locBadge: card.querySelector('.loc-badge'),
     ring: card.querySelector('.ring-progress'),
     ringTime: card.querySelector('.ring-time'),
     ringLabel: card.querySelector('.ring-label'),
@@ -260,7 +262,32 @@ function updateCard(person, refs, weekday, weekdayIdx, minutes, seconds) {
   }
 }
 
-const state = { cards: [] };
+const STATUS_ENDPOINT = 'https://35.196.48.71.sslip.io/status';
+const LOCATION_POLL_MS = 20000;
+const state = { cards: [], location: {} };
+
+const LOC_LABELS = { home: '🏠 Home', campus: '🎓 Campus' };
+
+async function pollLocation() {
+  try {
+    const res = await fetch(STATUS_ENDPOINT, { cache: 'no-store' });
+    if (!res.ok) return;
+    state.location = await res.json();
+  } catch {
+    // silently ignore - badge just won't show
+  }
+  for (const { person, refs } of state.cards) {
+    const status = state.location[person.id];
+    const label = LOC_LABELS[status];
+    if (label) {
+      refs.locBadge.textContent = label;
+      refs.locBadge.className = `loc-badge ${status}`;
+      refs.locBadge.hidden = false;
+    } else {
+      refs.locBadge.hidden = true;
+    }
+  }
+}
 
 function init() {
   const grid = document.getElementById('grid');
@@ -312,3 +339,5 @@ function tick() {
 init();
 tick();
 setInterval(tick, 1000);
+pollLocation();
+setInterval(pollLocation, LOCATION_POLL_MS);
