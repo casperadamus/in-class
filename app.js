@@ -165,9 +165,17 @@ function buildCard(person) {
     dayRefs[day] = { block, nowLine, items: blockRefs, todayFlag: block.querySelector('.today-flag') };
   }
 
+  const details = card.querySelector('.details');
   card.querySelector('.expand-toggle').addEventListener('click', (e) => {
     e.stopPropagation();
-    card.classList.toggle('open');
+    const opening = !card.classList.contains('open');
+    card.classList.toggle('open', opening);
+    details.style.maxHeight = opening ? `${detailsInner.scrollHeight}px` : '0px';
+  });
+  window.addEventListener('resize', () => {
+    if (card.classList.contains('open')) {
+      details.style.maxHeight = `${detailsInner.scrollHeight}px`;
+    }
   });
 
   const refs = {
@@ -195,9 +203,10 @@ function setRing(refs, fraction, colorVar) {
 function updateCard(person, refs, weekday, weekdayIdx, minutes, seconds) {
   const current = getCurrentClass(person, weekday, minutes);
   const next = getNextClass(person, weekdayIdx, minutes);
+  const betweenClasses = !current && next && next.daysAhead === 0;
 
-  refs.pill.className = 'pill ' + (current ? 'busy' : 'free');
-  refs.pillText.textContent = current ? 'In class' : 'Free';
+  refs.pill.className = 'pill ' + (current ? 'busy' : betweenClasses ? 'soon' : 'free');
+  refs.pillText.textContent = current ? 'In class' : betweenClasses ? 'Between classes' : 'Free';
 
   if (current) {
     const startSec = toMinutes(current.start) * 60;
@@ -210,11 +219,11 @@ function updateCard(person, refs, weekday, weekdayIdx, minutes, seconds) {
     refs.metaCourse.textContent = current.course;
     refs.metaLoc.textContent = `📍 ${current.location}`;
     refs.metaExtra.textContent = `${current.type} · until ${fmtClock12(toMinutes(current.end))}`;
-  } else if (next && next.daysAhead === 0) {
+  } else if (betweenClasses) {
     const startSec = toMinutes(next.start) * 60;
     const until = startSec - seconds;
     const fraction = 1 - Math.min(1, Math.max(0, until / LOOKAHEAD_SEC));
-    setRing(refs, fraction, 'var(--free)');
+    setRing(refs, fraction, 'var(--soon)');
     refs.ringTime.textContent = fmtCountdown(until);
     refs.ringLabel.textContent = 'until next';
     refs.metaCourse.textContent = next.course;
@@ -285,15 +294,24 @@ function tick() {
   }
 
   let busyCount = 0;
+  let soonCount = 0;
   for (const { person, refs } of state.cards) {
     updateCard(person, refs, weekday, weekdayIdx, minutes, seconds);
-    if (getCurrentClass(person, weekday, minutes)) busyCount++;
+    const current = getCurrentClass(person, weekday, minutes);
+    if (current) {
+      busyCount++;
+    } else {
+      const next = getNextClass(person, weekdayIdx, minutes);
+      if (next && next.daysAhead === 0) soonCount++;
+    }
   }
+  const freeCount = PEOPLE.length - busyCount - soonCount;
 
   const summary = document.getElementById('summary');
   summary.innerHTML = `
     <span class="chip busy"><span class="dot"></span>${busyCount} in class</span>
-    <span class="chip free"><span class="dot"></span>${PEOPLE.length - busyCount} free</span>
+    ${soonCount ? `<span class="chip soon"><span class="dot"></span>${soonCount} between classes</span>` : ''}
+    <span class="chip free"><span class="dot"></span>${freeCount} free</span>
   `;
 }
 

@@ -13,6 +13,8 @@
   --free-bg: #dcfce7;
   --busy: #b91c1c;
   --busy-bg: #fee2e2;
+  --soon: #b45309;
+  --soon-bg: #fef3c7;
   --track: #eceef3;
   --shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 8px 24px -8px rgba(16, 24, 40, 0.10);
   --shadow-hover: 0 4px 10px rgba(16, 24, 40, 0.06), 0 16px 36px -10px rgba(16, 24, 40, 0.16);
@@ -33,6 +35,8 @@
     --free-bg: #123120;
     --busy: #f87171;
     --busy-bg: #351616;
+    --soon: #fbbf24;
+    --soon-bg: #3a2a0a;
     --track: #23262f;
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 30px -10px rgba(0, 0, 0, 0.6);
     --shadow-hover: 0 4px 10px rgba(0, 0, 0, 0.35), 0 20px 44px -12px rgba(0, 0, 0, 0.7);
@@ -114,6 +118,7 @@ header h1 {
 }
 .summary .chip.busy .dot { background: var(--busy); }
 .summary .chip.free .dot { background: var(--free); }
+.summary .chip.soon .dot { background: var(--soon); }
 
 .banner {
   background: var(--busy-bg);
@@ -196,6 +201,7 @@ header h1 {
 }
 .pill.free { background: var(--free-bg); color: var(--free); }
 .pill.busy { background: var(--busy-bg); color: var(--busy); }
+.pill.soon { background: var(--soon-bg); color: var(--soon); }
 
 .pill .dot {
   width: 6px;
@@ -295,9 +301,6 @@ header h1 {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease;
-}
-.card.open .details {
-  max-height: 900px;
 }
 .details-inner { padding-top: 14px; }
 
