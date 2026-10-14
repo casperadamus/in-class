@@ -17,6 +17,7 @@ const PEOPLE = [
       { day: 'Tue', start: '15:45', end: '17:45', course: 'ECE 2001-002D', type: 'Discussion', location: 'McHugh 107' },
       { day: 'Wed', start: '10:10', end: '11:00', course: 'ECE 2001-001', type: 'Lecture', location: 'Arjona 105' },
       { day: 'Wed', start: '13:25', end: '14:15', course: 'CSE 3100-011', type: 'Lecture', location: 'Family Studies 025' },
+      { day: 'Wed', start: '15:45', end: '17:45', course: 'CSE 3100-011', type: 'Lecture', location: 'Family Studies 025' },
       { day: 'Thu', start: '10:00', end: '11:50', course: 'CSE 2301-002L', type: 'Lab', location: 'ITE C31' },
       { day: 'Thu', start: '14:00', end: '15:15', course: 'MATH 3510-001', type: 'Lecture', location: 'Monteith 419' },
       { day: 'Thu', start: '15:30', end: '16:45', course: 'CSE 2301-001', type: 'Lecture', location: 'McHugh 101' },
